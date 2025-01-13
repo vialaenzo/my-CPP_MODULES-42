@@ -1,38 +1,46 @@
 #ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
-#include <iostream>
-#include <sstream>
-#include <limits>
-#include <iomanip>
-#include <cstdlib>
-#include <cctype>
-#include <cerrno>
-#include <string>
+# include <iostream>
+# include <iomanip>
+# include <exception>
+# include <cstdlib>
+# include <limits>
+# include <cmath>
 
+# define MIN_INT std::numeric_limits<int>::min()
+# define MAX_INT std::numeric_limits<int>::max()
+# define MIN_FLOAT std::numeric_limits<float>::min()
+# define MAX_FLOAT std::numeric_limits<float>::max()
+# define MIN_DOUBLE std::numeric_limits<double>::min()
+# define MAX_DOUBLE std::numeric_limits<double>::max()
 
-class ScalarConverter
+enum    e_type
 {
-public:
-	ScalarConverter() {};
-
-	static void convert(const std::string &literal);
-
-private:
-	static bool isCharLiteral(const std::string &literal);
-	static bool isPseudoLiteral(const std::string &literal);
-	static void handlePseudoLiteral(const std::string &literal);
-	static void convertNumericLiteral(const std::string &literal);
-
-	static void printAsChar(char c);
-	static void printAsCharImpossible();
-	static void printAsInt(int i);
-	static void printAsIntImpossible();
-	static void printAsFloat(float f);
-	static void printAsFloat(const std::string &pseudoLiteral);
-	static void printAsFloatImpossible();
-	static void printAsDouble(double d);
-	static void printAsDouble(const std::string &pseudoLiteral);
+    SPECIAL = 0,
+    CHAR = 1,
+    INT = 2,
+    FLOAT = 3,
+    DOUBLE = 4,
+    INVALID = -1
 };
+
+class	ScalarConverter
+{
+	private:
+		ScalarConverter(void);
+		ScalarConverter(ScalarConverter const &src);
+		~ScalarConverter(void);
+		ScalarConverter	&operator=(ScalarConverter const &rhs);
+	public:
+		static void	convert(const std::string& str);
+};
+
+e_type	whichType(const std::string& str, size_t& len);
+void	printSpecial(const std::string& str);
+void	convertChar(const std::string& str, size_t& len);
+void	convertInt(const std::string& str);
+void	convertFloat(const std::string& str);
+void	convertDouble(const std::string& str);
 
 #endif

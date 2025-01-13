@@ -1,5 +1,5 @@
 # Nom du programme
-NAME = ex00
+NAME = convert
 
 # Dossier de sortie pour les fichiers objets
 OBJ_DIR = obj/
@@ -17,8 +17,9 @@ RM = rm -rf
 
 # Rechercher tous les fichiers .cpp dans le répertoire courant
 SRCS = main.cpp \
-	ScalarConverter.cpp
-
+	ScalarConverter.cpp \
+	Converters.cpp \
+	Selecters.cpp
 
 MAKEFLAGS += --no-print-directory
 TOTAL_FILES := $(words $(SRCS))
