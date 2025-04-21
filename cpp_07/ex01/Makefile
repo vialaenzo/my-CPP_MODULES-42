@@ -16,7 +16,7 @@ CPP = c++
 RM = rm -rf
 
 # Rechercher tous les fichiers .cpp dans le répertoire courant
-SRCS = main.cpp
+SRCS = main.cpp \
 
 
 MAKEFLAGS += --no-print-directory

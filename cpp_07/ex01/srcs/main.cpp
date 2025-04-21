@@ -1,28 +1,34 @@
-#include "iter.hpp"
-#include <string>
+#include <exception>
+#include <iomanip>
+#include <iostream>
 
-template <typename T>
-void print_element(T const &element)
-{
-	std::cout << element << " ";
+#include "iter.hpp"
+
+template <typename U>
+void printElement(const U &element) {
+    std::cout << element << " ";
 }
 
-int main(void)
+
+int main()
 {
-	int int_array[] = {1, 2, 3, 4, 5};
-	std::cout << "Int array: ";
-	iter(int_array, 5, print_element<int>);
+	std::cout << "NUMBERS\n\n" << std::endl;
+
+	int array[] = {1, 2, 3, 4, 5};
+	size_t length = sizeof(array) / sizeof(array[0]);
+
+	std::cout << "Elements of the array: ";
+	iter(array, length, printElement);
 	std::cout << std::endl;
 
-	std::string string_array[] = {"Hello", "World", "!"};
-	std::cout << "String array: ";
-	iter(string_array, 3, print_element<std::string>);
-	std::cout << std::endl;
+	std::cout << "ALPHAS\n\n" << std::endl;
+	char charArray[] = {'a', 'b', 'c', 'd', 'e'};
+    size_t charLength = sizeof(charArray) / sizeof(charArray[0]);
 
-	char char_array[] = {'a', 'b', 'c', 'd', 'e'};
-	std::cout << "Char array: ";
-	iter(char_array, 5, print_element<char>);
-	std::cout << std::endl;
+    std::cout << "Elements of the character array: ";
+    iter(charArray, charLength, printElement);
+    std::cout << std::endl;
+
 
 	return 0;
 }

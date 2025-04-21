@@ -1,5 +1,5 @@
 # Nom du programme
-NAME = ex02
+NAME = ex01
 
 # Dossier de sortie pour les fichiers objets
 OBJ_DIR = obj/
@@ -17,8 +17,6 @@ RM = rm -rf
 
 # Rechercher tous les fichiers .cpp dans le répertoire courant
 SRCS = main.cpp
-
-
 MAKEFLAGS += --no-print-directory
 TOTAL_FILES := $(words $(SRCS))
 CURRENT_INDEX := 0

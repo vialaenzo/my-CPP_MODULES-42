@@ -2,38 +2,40 @@
 #define MUTANTSTACK_HPP
 
 #include <stack>
-#include <iterator>
-#include <algorithm>
-#include <iostream>
+#include <deque>
 
 template <typename T>
-class MutantStack : public std::stack<T>
-{
+class MutantStack : public std::stack<T> {
 public:
-	MutantStack() : std::stack<T>() {}
-	MutantStack(const MutantStack &other) : std::stack<T>(other) {}
-	MutantStack &operator=(const MutantStack &other)
-	{
-		if (this != &other)
-		{
-			std::stack<T>::operator=(other);
-		}
-		return *this;
-	}
-	~MutantStack() {}
+    MutantStack() : std::stack<T>() {}
+    MutantStack(const MutantStack<T>& other) : std::stack<T>(other) {}
+    ~MutantStack() {}
 
-	typedef typename std::stack<T>::container_type::iterator iterator;
+    MutantStack& operator=(const MutantStack<T>& other) {
+        if (this != &other) {
+            std::stack<T>::operator=(other);
+        }
+        return *this;
+    }
 
-	iterator begin()
-	{
-		return std::stack<T>::c.begin();
-	}
+    typedef typename std::deque<T>::iterator iterator;
+    typedef typename std::deque<T>::const_iterator const_iterator;
 
-	iterator end()
-	{
-		return std::stack<T>::c.end();
-	}
+    iterator begin() {
+        return this->c.begin();
+    }
 
+    const_iterator begin() const {
+        return this->c.begin();
+    }
+
+    iterator end() {
+        return this->c.end();
+    }
+
+    const_iterator end() const {
+        return this->c.end();
+    }
 };
 
 #endif

@@ -1,6 +1,9 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
+#include <cstring>
+#include <stdexcept>
+
 #include <iostream>
 
 template <typename T>

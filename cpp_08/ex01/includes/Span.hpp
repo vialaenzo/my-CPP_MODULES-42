@@ -1,46 +1,27 @@
-#ifndef SPAN_HPP
-#define SPAN_HPP
+#pragma once
 
-#include <iostream>
 #include <vector>
 #include <algorithm>
-#include <exception>
+#include <stdexcept>
+#include <iterator>
 
-class Span
-{
+class Span {
 	private:
-		unsigned int _n;
-		std::vector<int> _valeurs;
-
+		unsigned int _N;
+		std::vector<int> _numbers;
 	public:
-		Span(unsigned int n) : _n(n) {};
-		Span(const Span &Span) {
-			*this = Span;
-		};
-		Span &operator=(const Span &Span) {
-			_n = Span._n;
-			_valeurs = Span._valeurs;
-			return *this;
-		};
-		~Span() {
-			_valeurs.clear();
-		};
 
-		void addNumbers(int n);
-		int shortestSpan() const;
-		int longestSpan() const;
+	Span(unsigned int N);
 
+	void addNumbers(int numbers);
+	unsigned int shortestSpan() const;
+	unsigned int longestSpan() const;
 
-		template <typename Iterator>
-		void addNumbers(Iterator begin, Iterator end)
-		{
-			size_t rangeSize = std::distance(begin, end);
-			if (_valeurs.size() + rangeSize > _n)
-			{
-				throw std::overflow_error("Adding range exceeds soan capacity.");
-			}
-			_valeurs.insert(_valeurs.end(), begin, end);
+	template <typename InputIterator>
+	void addRange(InputIterator first, InputIterator last) {
+		if (std::distance(first, last ) > static_cast<long>(_N - _numbers.size())) {
+			throw std::length_error("Range to large to add to Span");
 		}
+		_numbers.insert(_numbers.end(), first, last);
+	}
 };
-
-#endif
